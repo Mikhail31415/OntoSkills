@@ -1,13 +1,29 @@
-# Ontological Approach for Competency-Based Curriculum Analysis
+python version = 3.12
 
-## Software Purpose
+Основные зависимости окружения:
+pip install pyyaml beautifulsoup4 owlready2 openai tiktoken aiofiles aiohttp
 
-This software is designed for loading data into an ontological model of a competency-based curriculum, extracting data from the ontology, and analyzing the consistency of the curriculum in terms of input requirements for the study of disciplines and learning outcomes in previous periods.
+Для работы приложения необходимо чтобы в переменных среды была установленна переменная с именем OPENAI_API_KEY и значением вашего API ключа от OpenAI API
 
-## Scripts
+Для автоматической генерации промпта добавьте комментарий который начинается с "!" к классам индивидов которых вы хотите добавить, и свойствам, которые необходимо извлечь из текста. 
+Можете дописать после "!" пояснение для модели о том что это свойство или класс значит, или другие инструкции по извлечению индивидов этого класса или добавлению этого свойства.
 
-1. `data.py` - primary data of the educational program
-2. `load.py` - loading data from the `data.py` file into the ontological model (after data loading, the ontology is saved in the `competencies2.rdf` file)
-3. `display.py` - extracting the curriculum and competency tree with terminal output
-4. `check.py` - analyzing the consistency of the curriculum
-5. `empty.rdf` - template ontology of the educational program (curriculum)
+Если же вы хотите отправить свой промпт, запросите вернуть результат в виде структуры:
+
+{ 
+    
+    “objects”: 
+         {
+              [“class name”, “object name”, “object metadata / additional data”, “object metadata / additional data” …], …
+         }
+                                                       
+    “object properties”: 
+         {
+              [“property name”, “subject name”, “object name”], …      
+         }
+
+     “data properties”: 
+         {
+              [“property name”, “object name”, “value”], …      
+         }
+}
